@@ -1,0 +1,4 @@
+opencv-python==4.3.0.38
+xlwt
+tqdm
+packaging

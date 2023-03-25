@@ -3,6 +3,7 @@ from collections import OrderedDict
 import torch
 import torch.nn as nn
 import torchvision.models as models
+from torchvision.models import DenseNet121_Weights
 
 
 class wblock(nn.Module):
@@ -32,13 +33,13 @@ class wblock(nn.Module):
 class Farnet(nn.Module):
     def __init__(self):
         super(Farnet, self).__init__()
-        self.features = models.densenet121(pretrained=True).features
+        self.features = models.densenet121(weights=DenseNet121_Weights.DEFAULT).features
 
         self.upsample2 = nn.Upsample(scale_factor=2, mode='bilinear')
-        self.upsample4 = nn.Upsample(scale_factor=4, mode='bilinear')
-        self.upsample8 = nn.Upsample(scale_factor=8, mode='bilinear')
-        self.upsample16 = nn.Upsample(scale_factor=16, mode='bilinear')
-        self.upsample32 = nn.Upsample(scale_factor=32, mode='bilinear')
+        # self.upsample4 = nn.Upsample(scale_factor=4, mode='bilinear')
+        # self.upsample8 = nn.Upsample(scale_factor=8, mode='bilinear')
+        # self.upsample16 = nn.Upsample(scale_factor=16, mode='bilinear')
+        # self.upsample32 = nn.Upsample(scale_factor=32, mode='bilinear')
 
         self.wblock1 = wblock(1, 512, 512, 256)
         self.wblock2 = wblock(1, 1024, 1024, 256)
@@ -192,3 +193,11 @@ class Farnet(nn.Module):
         hp = self.conv_33_last1(x)
         hp = self.conv_11_last(hp)
         return hp, refine_hp
+
+
+if __name__ == '__main__':
+    model = Farnet()
+    x = torch.randn((1, 3, 800, 640))
+    y = model(x)
+    print(y[0].shape)
+    print(y[1].shape)

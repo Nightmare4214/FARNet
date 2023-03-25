@@ -1,11 +1,11 @@
-class Config():
-    img_dir = ''
-    gt_dir = ''
-    test_img_dir2 = ''
-    test_gt_dir2 = ''
-    test_img_dir1 = ''
-    test_gt_dir1 = ''
-    GPU = 2
+class Config:
+    img_dir = '/mnt/data/datasets/ISBI2015_ceph/RawImage/TrainingData'
+    gt_dir = '/mnt/data/datasets/ISBI2015_ceph/400_average'
+    test_img_dir2 = '/mnt/data/datasets/ISBI2015_ceph/RawImage/Test1Data'
+    test_gt_dir2 = '/mnt/data/datasets/ISBI2015_ceph/400_average'
+    test_img_dir1 = '/mnt/data/datasets/ISBI2015_ceph/RawImage/Test2Data'
+    test_gt_dir1 = '/mnt/data/datasets/ISBI2015_ceph/400_average'
+    GPU = 0
     base_number = 40
     scal_h = 3
     scal_w = 1935 / 640
@@ -15,5 +15,5 @@ class Config():
     point_num = 19
     num_epochs = 300
     lr = 1e-4
-    save_model_path = ''
-    save_results_path = ''
+    save_model_path = '/mnt/data/PyTorch_model/FarNet/model.pth'
+    save_results_path = '/mnt/data/PyTorch_model/FarNet/result.xlsx'

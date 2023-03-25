@@ -1,6 +1,6 @@
 import os
 
-import cv2
+from cv2 import cv2
 import numpy as np
 import torch
 from torch.utils.data import Dataset
@@ -28,7 +28,7 @@ class medical_dataset(Dataset):
         img_path = os.path.join(self.img_dir, img_name)
         img, scal_ratio_w, scal_ratio_h = self.img_preproccess(img_path)
         # img = normalize_robust(img)
-        gt_path = self.gt_dir + '/' + img_name.split('.')[0] + '.txt'
+        gt_path = os.path.join(self.gt_dir, os.path.splitext(img_name)[0] + '.txt')
         gt_x, gt_y = get_markposion_fromtxt(self.point_num, gt_path)
         x_all = gt_x / scal_ratio_w
         y_all = gt_y / scal_ratio_h
